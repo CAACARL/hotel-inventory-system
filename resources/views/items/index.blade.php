@@ -36,52 +36,52 @@
     selectedItem: null,
     deleteItemId: null,
     deleteItemName: ''
-}">
+}" @open-borrow-modal.window="selectedItem = $event.detail; borrowModal = true">
 <x-app-layout>
-    <div class="py-4 sm:py-8">
-        <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+    <div class="py-3 sm:py-6">
+        <div class="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6">
             
             <!-- Modern Page Header -->
-            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6 sm:mb-8">
-                <div class="flex items-center space-x-3 sm:space-x-4">
-                    <div class="w-10 h-10 sm:w-14 sm:h-14 rounded-2xl flex items-center justify-center shadow-lg flex-shrink-0" 
+            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 mb-4 sm:mb-6">
+                <div class="flex items-center space-x-2 sm:space-x-3">
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center shadow-md flex-shrink-0" 
                          style="background: linear-gradient(135deg, #3D2914 0%, #D4AF37 100%);">
-                        <svg class="w-5 h-5 sm:w-8 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
                         </svg>
                     </div>
                     <div>
-                        <h1 class="text-2xl sm:text-4xl font-bold mb-1 text-amber-700">Inventory Items</h1>
-                        <p class="text-gray-600 text-sm sm:text-lg font-medium hidden sm:block">Manage your hotel's inventory items and stock levels</p>
-                        <div class="flex items-center mt-1 sm:mt-3 text-sm text-gray-500">
-                            <div class="w-2 h-2 bg-blue-500 rounded-full mr-2"></div>
+                        <h1 class="text-xl sm:text-2xl font-bold mb-0.5 text-amber-700">Inventory Items</h1>
+                        <p class="text-gray-600 text-xs sm:text-sm font-medium hidden sm:block">Manage your hotel's inventory items and stock levels</p>
+                        <div class="flex items-center mt-0.5 sm:mt-1 text-xs text-gray-500">
+                            <div class="w-1.5 h-1.5 bg-blue-500 rounded-full mr-1.5"></div>
                             <span class="font-medium">{{ $items->total() }} Items</span>
                         </div>
                     </div>
                 </div>
-                <div class="flex items-center space-x-2 sm:space-x-4">
+                <div class="flex items-center space-x-2">
                     @if(auth()->user()->isAdmin())
-                        <a href="{{ route('items.borrowed') }}" class="inline-flex items-center px-3 sm:px-6 py-2 sm:py-3 bg-white rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl text-sm font-semibold" style="border: 1px solid #F97316; color: #EA580C;">
-                            <svg class="w-4 h-4 sm:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <a href="{{ route('items.borrowed') }}" class="inline-flex items-center px-3 sm:px-4 py-1.5 sm:py-2 bg-white rounded-lg transition-all duration-200 shadow-md hover:shadow-lg text-xs font-semibold" style="border: 1px solid #F97316; color: #EA580C;">
+                            <svg class="w-3.5 h-3.5 sm:mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path>
                             </svg>
                             <span class="hidden sm:inline">Borrowed Items</span>
                         </a>
-                        <a href="{{ route('items.archived') }}" class="inline-flex items-center px-3 sm:px-6 py-2 sm:py-3 bg-white rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl text-sm font-semibold" style="border: 1px solid #6B7280; color: #374151;">
-                            <svg class="w-4 h-4 sm:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <a href="{{ route('items.archived') }}" class="inline-flex items-center px-3 sm:px-4 py-1.5 sm:py-2 bg-white rounded-lg transition-all duration-200 shadow-md hover:shadow-lg text-xs font-semibold" style="border: 1px solid #6B7280; color: #374151;">
+                            <svg class="w-3.5 h-3.5 sm:mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8l1 12a2 2 0 002 2h8a2 2 0 002-2l1-12M10 12v4m4-4v4"></path>
                             </svg>
                             <span class="hidden sm:inline">Archived Items</span>
                         </a>
-                        <button @click="createModal = true" class="inline-flex items-center px-3 sm:px-6 py-2 sm:py-3 bg-white rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl text-sm font-semibold" style="border: 1px solid #D4AF37; color: #3D2914;">
-                            <svg class="w-4 h-4 sm:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <button @click="createModal = true" class="inline-flex items-center px-3 sm:px-4 py-1.5 sm:py-2 bg-white rounded-lg transition-all duration-200 shadow-md hover:shadow-lg text-xs font-semibold" style="border: 1px solid #D4AF37; color: #3D2914;">
+                            <svg class="w-3.5 h-3.5 sm:mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                             </svg>
                             <span class="hidden sm:inline">Add New Item</span>
                         </button>
                     @else
-                        <a href="{{ route('items.borrowed') }}" class="inline-flex items-center px-3 sm:px-6 py-2 sm:py-3 bg-white rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl text-sm font-semibold" style="border: 1px solid #F97316; color: #EA580C;">
-                            <svg class="w-4 h-4 sm:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <a href="{{ route('items.borrowed') }}" class="inline-flex items-center px-3 sm:px-4 py-1.5 sm:py-2 bg-white rounded-lg transition-all duration-200 shadow-md hover:shadow-lg text-xs font-semibold" style="border: 1px solid #F97316; color: #EA580C;">
+                            <svg class="w-3.5 h-3.5 sm:mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path>
                             </svg>
                             <span class="hidden sm:inline">My Borrowed Items</span>
@@ -99,6 +99,10 @@
         @include('items.partials.create-modal')
 
         @include('items.partials.edit-modal')
+
+        @include('items.partials.borrow-modal')
+
+        @include('items.partials.return-modal')
 
     </div>
 

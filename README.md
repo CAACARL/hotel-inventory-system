@@ -1,244 +1,131 @@
-# Icon Venue & Suites — Inventory Management System
+# 🏨 Icon Venue & Suites - Inventory Management System
 
-A web-based inventory management system built for Icon Venue & Suites to track stock, manage item borrowing, monitor batch expiry, and maintain a full audit trail of all inventory movements.
+A comprehensive Laravel-based inventory management system designed specifically for hotel operations, featuring advanced batch tracking with FIFO/FEFO logic, depreciation tracking, borrowing/return workflows, and automated expiry handling.
 
----
+## 📋 Table of Contents
 
-## Tech Stack
+- [Features](#features)
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Configuration](#configuration)
+- [Usage Guide](#usage-guide)
+- [Automated Tasks](#automated-tasks)
+- [System Architecture](#system-architecture)
+- [Troubleshooting](#troubleshooting)
 
-| Layer | Technology |
-|-------|-----------|
-| Backend | Laravel 12 (PHP 8.2) |
-| Frontend | Blade templates, Tailwind CSS, Alpine.js |
-| Database | SQLite (default), MySQL/PostgreSQL compatible |
-| Email | SMTP via Laravel Mail |
-| Build | Vite |
-
----
-
-## Roles
-
-| Role | Description |
-|------|-------------|
-| Admin | Full access to all features |
-| Staff | Can browse items, borrow, return, and view their own transactions |
-
-Users cannot self-register. All accounts are created by an admin.
+> **📊 For a detailed feature completeness assessment, see [FEATURE_COMPLETENESS.md](FEATURE_COMPLETENESS.md)**
 
 ---
 
-## Authentication
+## ✨ Features
 
-- **Login** — `/login` with email and password. Rate-limited to 5 attempts per minute. Failed attempts are logged.
-- **Two-Factor Authentication** — Optional per-user. A one-time code is sent via email on login. Trusted devices can skip 2FA for 30 days.
-- **Account creation** — Admin-only. A welcome email with credentials is automatically sent to the new user.
-- **Password reset** — Via "Forgot password?" on the login page. Requires SMTP.
-- **Logout** — Invalidates the session and redirects to login.
+### Core Inventory Management
+- **Dual Item Types**: Consumables (soap, towels, toiletries) and Non-Consumables (laptops, furniture, equipment)
+- **Batch Tracking**: Every stock replenishment creates a batch with unique batch number, location, and optional expiry date
+- **Hierarchical Categories**: Unlimited nested categories for organized inventory structure with automatic path generation
+- **Department Assignment**: Track which department owns or manages each item
+- **Item Images**: Visual identification with image upload support (JPEG, PNG, GIF, WebP)
+- **Soft Deletes**: Archive items and categories without losing historical data
 
----
+### Advanced Inventory Logic
 
-## Features
+#### FIFO/FEFO System
+- **FEFO (First Expired, First Out)**: For consumables - automatically uses items expiring soonest
+- **FIFO (First In, First Out)**: For non-consumables - automatically uses oldest items first
+- **Mixed Batch Handling**: Intelligently handles batches with and without expiry dates
+- **Automatic Expiry Detection**: Daily scheduled task marks expired batches as spoiled
+- **Batch Transparency**: Modal shows which batches will be used/returned before confirming transaction
 
-### Dashboard
-- Stat cards: total items, low stock count, active borrows, total inventory value
-- Recent activity feed (latest transactions)
-- Low stock alerts (items at or below minimum threshold)
-- Currently borrowed items summary
+#### Asset Depreciation Tracking
+- **Depreciation Methods**: 
+  - **Straight Line**: Even depreciation over useful life
+  - **Declining Balance**: Accelerated depreciation (double declining balance method)
+  - **None**: For items that don't depreciate
+- **Automatic Calculations**: Real-time book value calculations
+- **Batch-Level Tracking**: Each batch can have different depreciation settings
+- **Financial Reporting**: Total asset value reflects current book values after depreciation
+- **Monthly Updates**: Scheduled recalculation of all depreciation values
+- **Fields Tracked**: Purchase price, purchase date, useful life (years), salvage value, depreciation rate
 
-### Categories
-Hierarchical — parent categories can have child categories (e.g., `Office Supplies > Stationery`). Items are assigned to the most specific level.
+#### Borrowing & Returns
+- **Borrow Workflow**: Staff can borrow items (typically non-consumables)
+- **Automatic Batch Selection**: System picks batches using FIFO/FEFO logic
+- **Return to Original Batch**: Items return to the exact batch they were borrowed from
+- **Partial Returns**: Support for returning items in multiple transactions
+- **Borrower Tracking**: Records borrower name, department, and notes
 
-- Admin-only management (create, edit, archive)
-- Archive is blocked if the category has items or subcategories
-- Archived categories are hidden from all dropdowns and item assignment
-- Archived categories can be restored from `/categories/archived`
+### Transaction Management
+- **Transaction Types**: Replenish, Borrow, Return, Disposal, Expiry, Spoiled
+- **Reference Numbers**: Auto-generated unique references for audit trails (e.g., BOR-001, RET-002)
+- **Full History**: Complete transaction log with user, date, batch information, and notes
+- **Excel Exports**: Export transactions, inventory, batches, borrowed items with full formatting
+- **Transaction Clearing**: Admin can clear old transaction history while preserving audit logs
 
-### Items
-Core entity of the system. Each item has:
-- Name, description, location
-- Category (hierarchical), department (optional)
-- Item type: `consumable` or `non-consumable`
-- Status: `available`, `in_use`, `disposed`, `spoiled`
-- Minimum stock threshold — triggers low stock alerts
-- Optional image (thumbnail in lists, expandable lightbox)
+### User Management & Security
+- **Role-Based Access**: Admin (full access) and Staff (limited access)
+- **Two-Factor Authentication (2FA)**: Email-based verification codes
+- **Trusted Devices**: Remember devices to skip 2FA on trusted machines
+- **Profile Pictures**: User avatars with default color-coded initials
+- **Email Notifications**: Welcome emails with credentials for new users
+- **Failed Login Logging**: Security monitoring of login attempts
+- **Activity Logs**: Complete audit trail of all system changes with before/after values
 
-Items start with zero quantity. Stock is added through batches.
+### Notifications System
+- **Real-Time Notifications**: In-app notification bell with unread count
+- **Notification Types**:
+  - 🔴 Low Stock Alerts
+  - 🟡 Expiring Soon (batches expiring within 30 days)
+  - 🔴 Expired Batches
+  - 🔵 New Borrows
+  - 🔵 Items Returned
+  - 🟢 New Batches Created
+- **Admin Notifications**: Admins receive all notifications, staff see their own
+- **Deduplication**: Smart daily deduplication to prevent notification spam
+- **Mark All as Read**: Quick action to clear all notifications
 
-**Archive** — Admins can archive items. Archiving is blocked if the item has stock remaining or active borrows. Archived items are hidden from inventory but their transaction history is preserved. Restorable from `/items/archived`.
+### Reporting & Analytics
+- **Dashboard Stats Cards**:
+  - Total Items count
+  - Low Stock Items count
+  - Active Users count
+  - Total Asset Value (with depreciation)
+  - Recent Activity feed
+  - Alerts for low stock and expiring items
+- **Transaction Reports**:
+  - Summary statistics (total items, categories, transactions)
+  - Transaction breakdown by type
+  - Recent transactions table
+  - Export to Excel
+- **Inventory Reports**:
+  - Complete item listing with stock levels
+  - Category-wise breakdown
+  - Valuation with current book values
+  - Export functionality
+- **Batch Management**:
+  - View all batches with expiry tracking
+  - Batch details with depreciation calculations
+  - Export batch data
 
-**Dispose** — Admin-only. Reduces item quantity and records a disposal transaction. If quantity reaches zero, item status is set to `disposed`.
+### Automated Background Tasks
+- **Daily Tasks**:
+  - Check and mark expired consumable batches (daily)
+  - Reconcile item quantities with batch totals (daily at 2 AM)
+  - Generate expiring soon notifications (daily)
+  - Generate expired batch notifications (daily)
+- **Monthly Tasks**:
+  - Update depreciation calculations for all assets (monthly)
+- **On-Demand Commands**:
+  - `php artisan consumables:check-expired` - Check for expired items
+  - `php artisan depreciation:update` - Recalculate depreciation
+  - `php artisan inventory:reconcile-quantities` - Fix quantity mismatches
+  - `php artisan categories:update-hierarchy` - Rebuild category paths
 
-### Batches
-Represent a stock replenishment event. Each batch records:
-- Quantity, unit cost, supplier, lot number
-- Manufacture and expiry dates (consumables)
-- Depreciation settings: method (straight-line or declining balance), useful life, salvage value, depreciation rate (non-consumables)
-- Notes
-
-On batch creation:
-- Item quantity is incremented
-- A replenish transaction is logged
-- All other admins are notified
-
-For consumable batches with an expiry date, the system automatically marks the batch as expired and deducts the quantity when the expiry date passes. If item quantity reaches zero, it is marked as `spoiled`.
-
-Depreciation is tracked at the batch level. Book value is calculated on-the-fly using the configured method and purchase date.
-
-### Transactions
-Every inventory movement is recorded:
-
-| Type | Description |
-|------|-------------|
-| replenish | Stock added via a batch |
-| borrow | Item borrowed by a user |
-| return | Borrowed item returned |
-| disposal | Stock written off |
-| spoiled | Consumable stock expired |
-
-Each transaction stores: item, user, quantity, type, reference number, date, and notes. Transactions referencing archived items are still visible in history.
-
-### Borrow & Return
-Staff and admins can borrow available items from the items list.
-
-On borrow:
-- Item quantity decremented
-- BorrowedItem record created
-- Borrow transaction logged
-- Admins notified
-
-On return:
-- Item quantity restored
-- BorrowedItem record updated or removed
-- Return transaction logged
-- Admins notified
-
-Admins see all borrowed items at `/borrowed-items`. Staff see only their own.
-
-### Departments
-Admins can create, edit, and activate/deactivate departments. Inactive departments are hidden from all assignment dropdowns but their data and item assignments are preserved.
-
-Departments with assigned items cannot be deleted.
-
-### Users (Admin only)
-Admins can create, edit, and activate/deactivate user accounts. A welcome email with credentials is sent on creation. Deactivated users cannot log in. Admins cannot deactivate their own account.
-
-### Reports & Exports (Admin only)
-The reports page provides transaction analytics with charts, filterable by date range. Four CSV exports are available:
-
-| Export | Contents |
-|--------|----------|
-| Transactions | Full transaction history with item, type, quantity, staff, reference |
-| Inventory | All items with stock, status, location, unit price, total value |
-| Borrowed Items | Active borrows with borrower, department, days out, overdue status |
-| Comprehensive Report | Executive summary + stock analysis + top borrowed items + all of the above |
-
-### Notifications
-Bell icon in the header with live unread count.
-
-**Admins receive:**
-- New borrow / item returned
-- Low stock (once per day per item)
-- New batch created
-- Batch expiring soon (within 30 days, once per day)
-- Expired batch (once per day)
-
-**Staff receive:**
-- Daily reminder of items they currently have borrowed
-
----
-
-## UI
-
-- Fully responsive — mobile and desktop
-- Collapsible sidebar with persistent state
-- Universal header: page search, notification bell, appearance settings, profile dropdown
-- Image lightbox — click any item image to expand full screen
-- Page transition loader animation
-- Search modals on all list pages with relevant filters per page
-
----
-
-## Installation
-
-```bash
-composer install
-npm install
-cp .env.example .env
-php artisan key:generate
-php artisan migrate --seed
-php artisan storage:link
-npm run build
-php artisan serve
-```
-
-On Windows, run `install.bat`.
-
-Configure SMTP settings in `.env` for email features.
-
----
-
-## Default Credentials
-
-| Role | Email | Password |
-|------|-------|----------|
-| Admin | admin@iconvenue.com | password |
-| Staff | staff@iconvenue.com | password |
-
----
-
-## Scheduled Commands
-
-| Command | Description |
-|---------|-------------|
-| `check:expired-consumables` | Marks expired consumable batches and deducts stock |
-| `depreciation:update` | Recalculates depreciation for all active non-consumable batches |
-| `update:category-hierarchy` | Rebuilds category path and level cache |
-
----
-
-## Key File Structure
-
-```
-app/
-  Http/Controllers/
-    Auth/                         — login, 2FA, password reset
-    ItemController.php            — items, borrow, return, disposal, archive
-    BatchController.php           — batch management
-    CategoryController.php        — category management, archive
-    DepartmentController.php      — department management, toggle active
-    TransactionController.php     — history, reports
-    UserController.php            — user management, toggle active
-    NotificationController.php    — mark notifications as read
-    TransactionExportController.php — CSV exports
-  Models/
-    User.php                      — auth, roles, 2FA, avatar
-    Item.php                      — inventory item, soft deletes
-    Batch.php                     — batch, expiry, depreciation logic
-    Category.php                  — hierarchical categories, soft deletes
-    BorrowedItem.php              — active borrows tracker
-    Transaction.php               — transaction history
-    Notification.php              — in-app notifications
-  Mail/
-    WelcomeUser.php               — welcome email on account creation
-    TwoFactorCode.php             — 2FA code email
-  Providers/
-    AppServiceProvider.php        — notification view composer
-
-resources/views/
-  layouts/                        — app and guest layouts
-  auth/                           — login, 2FA, password reset
-  emails/                         — email templates
-  items/                          — item list, show, borrow, return, archived
-  batches/                        — batch list, show, replenish modal
-  categories/                     — category tree, archived
-  departments/                    — department tiles
-  transactions/                   — transaction list, show, reports
-  users/                          — user cards
-  dashboard/                      — dashboard partials
-
-database/
-  migrations/                     — all schema migrations
-  seeders/
-    AdminSeeder.php               — default admin account
-    DatabaseSeeder.php            — runs all seeders
-```
+### Additional Features
+- **Search & Filtering**: Advanced search across items, categories, transactions
+- **Pagination**: Efficient pagination (15 items per page)
+- **Responsive Design**: Mobile-friendly interface with Tailwind CSS
+- **Glass Morphism UI**: Modern gradient design with hotel branding colors
+- **Alpine.js Interactivity**: Smooth modal interactions and dynamic updates
+- **Unit Flexibility**: Support for custom units (pcs, sets, bottles, bags, rolls, boxes, etc.)
+- **Minimum Stock Levels**: Set thresholds for low stock alerts
+- **Profile Management**: Users can update profile, change password, manage 2FA

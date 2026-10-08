@@ -36,26 +36,26 @@
 </style>
 
 <x-app-layout>
-    <div class="py-8">
-        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="py-6">
+        <div class="max-w-7xl mx-auto px-4 lg:px-6">
                 
             <!-- Welcome Hero Section -->
-            <div class="welcome-gradient rounded-3xl shadow-2xl overflow-hidden mb-8">
-                <div class="px-4 sm:px-8 py-8 sm:py-12 relative">
-                    <div class="flex flex-col sm:flex-row items-center sm:justify-between gap-6">
-                        <div class="flex flex-col sm:flex-row items-center sm:space-x-6 gap-4 text-center sm:text-left">
+            <div class="welcome-gradient rounded-2xl shadow-xl overflow-hidden mb-6">
+                <div class="px-4 sm:px-6 py-6 sm:py-8 relative">
+                    <div class="flex flex-col sm:flex-row items-center sm:justify-between gap-4">
+                        <div class="flex flex-col sm:flex-row items-center sm:space-x-4 gap-3 text-center sm:text-left">
                             <div class="relative">
-                                <div class="relative w-28 h-28 flex items-center justify-center">
+                                <div class="relative w-20 h-20 flex items-center justify-center">
                                     @if(auth()->user()->profile_picture)
-                                        <div class="relative rounded-full bg-gradient-to-r from-amber-600 via-yellow-700 to-amber-800 shadow-2xl z-10" style="padding: 4px;">
+                                        <div class="relative rounded-full bg-gradient-to-r from-amber-600 via-yellow-700 to-amber-800 shadow-xl z-10" style="padding: 3px;">
                                             <img src="{{ auth()->user()->getProfilePictureUrl() }}" 
                                                  alt="{{ auth()->user()->name }}" 
-                                                 class="w-20 h-20 rounded-full object-cover bg-white">
+                                                 class="w-14 h-14 rounded-full object-cover bg-white">
                                         </div>
                                     @else
-                                        <div class="relative rounded-full bg-gradient-to-r from-amber-600 via-yellow-700 to-amber-800 shadow-2xl z-10" style="padding: 4px;">
-                                            <div class="w-20 h-20 bg-white bg-opacity-20 rounded-full flex items-center justify-center backdrop-blur-sm">
-                                                <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <div class="relative rounded-full bg-gradient-to-r from-amber-600 via-yellow-700 to-amber-800 shadow-xl z-10" style="padding: 3px;">
+                                            <div class="w-14 h-14 bg-white bg-opacity-20 rounded-full flex items-center justify-center backdrop-blur-sm">
+                                                <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                                                 </svg>
                                             </div>
@@ -82,14 +82,14 @@
                                     </div>
                                 </div>
                                 
-                                <div class="absolute top-1 right-1 w-6 h-6 bg-green-400 rounded-full flex items-center justify-center shadow-lg border-2 border-white z-20">
-                                    <div class="w-2 h-2 bg-white rounded-full pulse-ring"></div>
+                                <div class="absolute top-0 right-0 w-5 h-5 bg-green-400 rounded-full flex items-center justify-center shadow-lg border-2 border-white z-20">
+                                    <div class="w-1.5 h-1.5 bg-white rounded-full pulse-ring"></div>
                                 </div>
                             </div>
                             <div class="text-white">
-                                <h1 class="text-4xl font-bold mb-2">Good {{ date('H') < 12 ? 'Morning' : (date('H') < 18 ? 'Afternoon' : 'Evening') }}, {{ auth()->user()->name }}!</h1>
-                                <p class="text-xl text-white text-opacity-90 font-medium">Welcome back to your inventory workspace</p>
-                                <div class="flex items-center mt-4 space-x-4 text-white text-opacity-80">
+                                <h1 class="text-2xl font-bold mb-1">Good {{ date('H') < 12 ? 'Morning' : (date('H') < 18 ? 'Afternoon' : 'Evening') }}, {{ auth()->user()->name }}!</h1>
+                                <p class="text-base text-white text-opacity-90 font-medium">Welcome back to your inventory workspace</p>
+                                <div class="flex items-center mt-2 space-x-3 text-sm text-white text-opacity-80">
                                     <div class="flex items-center">
                                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3a2 2 0 012-2h4a2 2 0 012 2v4m-6 0V6a2 2 0 012-2h4a2 2 0 012 2v1m-6 0h6m-6 0l-.5 9a2 2 0 002 2h3a2 2 0 002-2L16 7m-6 0V6a2 2 0 012-2h4a2 2 0 012 2v1"></path>
@@ -106,7 +106,7 @@
                             </div>
                         </div>
                         <div class="hidden lg:block">
-                            <img src="{{ asset('images/pepega.webp') }}" alt="Icon Venue & Suites" class="w-32 h-32 object-contain floating-animation opacity-80">
+                            <img src="{{ asset('images/pepega.webp') }}" alt="Icon Venue & Suites" class="w-20 h-20 object-contain floating-animation opacity-80">
                         </div>
                     </div>
                 </div>
@@ -115,14 +115,14 @@
             @include('dashboard.partials.stats-cards')
 
             <!-- Main Content Grid -->
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
                 <!-- Recent Activity -->
                 <div class="lg:col-span-2">
                     @include('dashboard.partials.recent-activity')
                 </div>
 
                 <!-- Sidebar -->
-                <div class="space-y-6">
+                <div class="space-y-4">
                     @include('dashboard.partials.alerts')
                 </div>
             </div>

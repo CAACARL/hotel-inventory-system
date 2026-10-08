@@ -20,23 +20,23 @@
         body.modal-open { overflow: hidden; }
     </style>
 
-    <div class="py-4 sm:py-8">
-        <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+    <div class="py-3 sm:py-6">
+        <div class="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6">
             
             <!-- Modern Page Header -->
-            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6 sm:mb-8">
-                <div class="flex items-center space-x-3 sm:space-x-4">
-                    <div class="w-10 h-10 sm:w-14 sm:h-14 rounded-2xl flex items-center justify-center shadow-lg flex-shrink-0" 
+            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 mb-4 sm:mb-6">
+                <div class="flex items-center space-x-2 sm:space-x-3">
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center shadow-md flex-shrink-0" 
                          style="background: linear-gradient(135deg, #3D2914 0%, #D4AF37 100%);">
-                        <svg class="w-5 h-5 sm:w-8 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                         </svg>
                     </div>
                     <div>
-                        <h1 class="text-2xl sm:text-4xl font-bold mb-1 text-amber-700">Activity Logs</h1>
-                        <p class="text-gray-600 text-sm sm:text-lg font-medium hidden sm:block">Track all administrative actions and changes</p>
-                        <div class="flex items-center mt-1 sm:mt-3 text-sm text-gray-500">
-                            <div class="w-2 h-2 bg-blue-500 rounded-full mr-2"></div>
+                        <h1 class="text-xl sm:text-2xl font-bold mb-0.5 text-amber-700">Activity Logs</h1>
+                        <p class="text-gray-600 text-xs sm:text-sm font-medium hidden sm:block">Track all administrative actions and changes</p>
+                        <div class="flex items-center mt-0.5 sm:mt-1 text-xs text-gray-500">
+                            <div class="w-1.5 h-1.5 bg-blue-500 rounded-full mr-1.5"></div>
                             <span class="font-medium">{{ $logs->total() }} Activities</span>
                         </div>
                     </div>
@@ -215,7 +215,7 @@
                                             old_values: {{ json_encode($log->old_values) }},
                                             new_values: {{ json_encode($log->new_values) }}
                                         })" 
-                                           class="inline-flex items-center px-3 py-1.5 text-blue-700 hover:bg-blue-50 text-xs font-medium rounded-lg transition-colors border border-blue-200">
+                                           class="inline-flex items-center px-3 py-1.5 text-blue-600 hover:bg-blue-50 text-xs font-medium rounded-lg transition-colors">
                                             <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
@@ -282,7 +282,7 @@
                             old_values: {{ json_encode($log->old_values) }},
                             new_values: {{ json_encode($log->new_values) }}
                         })" 
-                           class="block w-full text-center px-3 py-1.5 text-blue-700 hover:bg-blue-50 rounded-lg transition-colors font-medium border border-blue-200 text-xs">
+                           class="block w-full text-center px-3 py-1.5 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors font-medium text-xs">
                             <svg class="w-4 h-4 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
@@ -296,7 +296,7 @@
                 <!-- Pagination -->
                 @if($logs->hasPages())
                 <div class="mt-6">
-                    {{ $logs->links() }}
+                    {{ $logs->links('vendor.pagination.custom') }}
                 </div>
                 @endif
             @endif

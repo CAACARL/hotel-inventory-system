@@ -133,6 +133,6 @@
 <!-- Pagination -->
 @if($users->hasPages())
 <div class="mt-8 flex justify-center">
-    {{ $users->links() }}
+    {{ $users->links('vendor.pagination.custom') }}
 </div>
 @endif

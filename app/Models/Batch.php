@@ -49,6 +49,13 @@ class Batch extends Model
     }
 
     /**
+     * Get name attribute for activity logging (uses batch_number)
+     */
+    public function getNameAttribute()
+    {
+        return $this->batch_number;
+    }
+    /**
      * Get items in this batch
      */
     public function items()

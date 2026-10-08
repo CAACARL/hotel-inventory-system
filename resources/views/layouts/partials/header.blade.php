@@ -141,7 +141,7 @@
                 </div>
 
                 <!-- List -->
-                <div class="max-h-80 overflow-y-auto divide-y divide-gray-50">
+                <div class="max-h-80 overflow-y-auto divide-y divide-gray-50 custom-scrollbar">
                     @forelse($notifications as $n)
                         <a href="{{ $n->url }}"
                            class="flex items-start gap-3 px-4 py-3 transition-colors {{ $n->isUnread() ? 'bg-amber-50 hover:bg-amber-100' : 'hover:bg-gray-50' }}">

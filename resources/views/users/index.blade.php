@@ -60,24 +60,24 @@
     }
 }">
 <x-app-layout>
-    <div class="py-4 sm:py-8">
-        <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+    <div class="py-3 sm:py-6">
+        <div class="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6">
             
             <!-- Modern Page Header -->
-            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6 sm:mb-8">
-                <div class="flex items-center space-x-3 sm:space-x-4">
-                    <div class="w-10 h-10 sm:w-14 sm:h-14 rounded-2xl flex items-center justify-center shadow-lg flex-shrink-0" 
+            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 mb-4 sm:mb-6">
+                <div class="flex items-center space-x-2 sm:space-x-3">
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center shadow-md flex-shrink-0" 
                          style="background: linear-gradient(135deg, #3D2914 0%, #D4AF37 100%);">
-                        <svg class="w-5 h-5 sm:w-8 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"></path>
                         </svg>
                     </div>
                     <div>
-                        <h1 class="text-2xl sm:text-4xl font-bold mb-1 text-amber-700">User Management</h1>
-                        <p class="text-gray-600 text-sm sm:text-lg font-medium hidden sm:block">Manage system users and their permissions</p>
-                        <div class="flex items-center gap-4 mt-1 sm:mt-3 text-sm text-gray-500">
+                        <h1 class="text-xl sm:text-2xl font-bold mb-0.5 text-amber-700">User Management</h1>
+                        <p class="text-gray-600 text-xs sm:text-sm font-medium hidden sm:block">Manage system users and their permissions</p>
+                        <div class="flex items-center gap-4 mt-0.5 sm:mt-1 text-xs text-gray-500">
                             <div class="flex items-center">
-                                <div class="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
+                                <div class="w-1.5 h-1.5 bg-green-500 rounded-full mr-1.5"></div>
                                 <span class="font-medium">{{ $users->count() }} Users</span>
                             </div>
                             <div class="flex items-center">
@@ -88,8 +88,8 @@
                     </div>
                 </div>
                 <div class="flex items-center">
-                    <button @click="resetForm(); createModal = true" class="inline-flex items-center px-3 sm:px-6 py-2 sm:py-3 bg-white rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl text-sm font-semibold" style="border: 1px solid #D4AF37; color: #3D2914;">
-                        <svg class="w-4 h-4 sm:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <button @click="resetForm(); createModal = true" class="inline-flex items-center px-3 sm:px-4 py-1.5 sm:py-2 bg-white rounded-lg transition-all duration-200 shadow-md hover:shadow-lg text-xs font-semibold" style="border: 1px solid #D4AF37; color: #3D2914;">
+                        <svg class="w-3.5 h-3.5 sm:mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                         </svg>
                         <span class="hidden sm:inline">Add New User</span>
@@ -98,10 +98,10 @@
             </div>
 
             <!-- Search & Filter Bar -->
-            <div class="flex flex-col sm:flex-row sm:items-center gap-3 mb-6 sm:mb-8">
+            <div class="flex flex-col sm:flex-row sm:items-center gap-3 mb-4 sm:mb-6">
                 <div class="flex flex-wrap gap-2">
-                    <button @click="searchModal = true" class="inline-flex items-center px-3 sm:px-6 py-2 sm:py-3 bg-white rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl text-sm font-semibold" style="border: 1px solid #D4AF37; color: #3D2914;">
-                        <svg class="w-4 h-4 sm:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <button @click="searchModal = true" class="inline-flex items-center px-3 sm:px-4 py-1.5 sm:py-2 bg-white rounded-lg transition-all duration-200 shadow-md hover:shadow-lg text-xs font-semibold" style="border: 1px solid #D4AF37; color: #3D2914;">
+                        <svg class="w-3.5 h-3.5 sm:mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                         </svg>
                         <span class="hidden sm:inline">Search Users</span>

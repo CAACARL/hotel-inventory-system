@@ -1,17 +1,17 @@
 <!-- Recent Activity -->
-<div class="dashboard-card p-6 relative overflow-hidden">
-    <div class="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-blue-500/5 to-transparent rounded-full -mr-20 -mt-20"></div>
+<div class="dashboard-card p-4 relative overflow-hidden">
+    <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-500/5 to-transparent rounded-full -mr-16 -mt-16"></div>
     <div class="relative">
-        <div class="flex items-center justify-between mb-6">
-            <div class="flex items-center space-x-3">
-                <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg">
-                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center space-x-2">
+                <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center shadow-md">
+                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                     </svg>
                 </div>
                 <div>
-                    <h3 class="text-xl font-bold text-gray-900">Recent Activity</h3>
-                    <p class="text-gray-600 text-sm">Latest inventory movements</p>
+                    <h3 class="text-base font-bold text-gray-900">Recent Activity</h3>
+                    <p class="text-gray-600 text-xs">Latest inventory movements</p>
                 </div>
             </div>
             @if(auth()->user()->isAdmin())
@@ -23,42 +23,42 @@
             </a>
             @endif
         </div>
-        <div class="space-y-3">
+        <div class="space-y-2">
             @forelse($recentTransactions as $transaction)
-            <div class="activity-item flex items-center p-4 rounded-xl border border-gray-100 hover:border-blue-200 hover:shadow-md transition-all duration-200 bg-gradient-to-r from-white to-gray-50">
-                <div class="w-11 h-11 rounded-xl flex items-center justify-center mr-4 shadow-md flex-shrink-0
+            <div class="activity-item flex items-center p-3 rounded-lg border border-gray-100 hover:border-blue-200 hover:shadow-md transition-all duration-200 bg-gradient-to-r from-white to-gray-50">
+                <div class="w-9 h-9 rounded-lg flex items-center justify-center mr-3 shadow-md flex-shrink-0
                     {{ $transaction->transaction_type === 'borrow' ? 'bg-gradient-to-br from-orange-500 to-red-600' : 
                        ($transaction->transaction_type === 'return' ? 'bg-gradient-to-br from-green-500 to-emerald-600' : 
                        ($transaction->transaction_type === 'replenish' ? 'bg-gradient-to-br from-blue-500 to-indigo-600' : 
                        ($transaction->transaction_type === 'disposal' ? 'bg-gradient-to-br from-red-500 to-pink-600' : 
                        ($transaction->transaction_type === 'spoiled' ? 'bg-gradient-to-br from-yellow-500 to-orange-600' : 'bg-gradient-to-br from-gray-500 to-gray-600')))) }}">
                     @if($transaction->transaction_type === 'borrow')
-                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4"></path>
                         </svg>
                     @elseif($transaction->transaction_type === 'return')
-                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 17l-4 4m0 0l-4-4m4 4V3"></path>
                         </svg>
                     @elseif($transaction->transaction_type === 'replenish')
-                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
                         </svg>
                     @elseif($transaction->transaction_type === 'disposal')
-                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
                         </svg>
                     @else
-                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
                         </svg>
                     @endif
                 </div>
                 <div class="flex-1 min-w-0">
                     <div class="flex items-center justify-between">
-                        <div class="flex-1 min-w-0 mr-4">
-                            <p class="font-semibold text-gray-900 truncate">{{ $transaction->item->name }}</p>
-                            <div class="flex items-center gap-2 mt-0.5">
+                        <div class="flex-1 min-w-0 mr-3">
+                            <p class="font-semibold text-sm text-gray-900 truncate">{{ $transaction->item->name }}</p>
+                            <div class="flex items-center gap-1.5 mt-0.5">
                                 <span class="inline-flex items-center px-2 py-0.5 rounded-md text-xs font-medium
                                     {{ $transaction->transaction_type === 'borrow' ? 'bg-orange-100 text-orange-700' : 
                                        ($transaction->transaction_type === 'return' ? 'bg-green-100 text-green-700' : 

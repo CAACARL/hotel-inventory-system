@@ -20,6 +20,32 @@
         <!-- Alpine.js for interactivity -->
         <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
         <style>
+            /* Custom Scrollbar Design - Brand Colors */
+            ::-webkit-scrollbar {
+                width: 12px;
+                height: 12px;
+            }
+            ::-webkit-scrollbar-track {
+                background: #f3f4f6;
+                border-radius: 10px;
+            }
+            ::-webkit-scrollbar-thumb {
+                background: linear-gradient(135deg, #3D2914 0%, #D4AF37 100%);
+                border-radius: 10px;
+                border: 2px solid #f3f4f6;
+            }
+            ::-webkit-scrollbar-thumb:hover {
+                background: linear-gradient(135deg, #2d1f0f 0%, #c49d2d 100%);
+            }
+            ::-webkit-scrollbar-corner {
+                background: #f3f4f6;
+            }
+            /* Firefox scrollbar */
+            * {
+                scrollbar-width: thin;
+                scrollbar-color: #D4AF37 #f3f4f6;
+            }
+
             /* Icon Venue & Suites - Exact Logo Colors */
             .hotel-gradient {
                 background: linear-gradient(135deg, #3D2914 0%, #D4AF37 50%, #F4E4BC 100%);
@@ -218,13 +244,13 @@
             </div>
 
             <!-- Sidebar (hidden on mobile unless open) -->
-            <div :class="[sidebarOpen ? 'translate-x-0' : '-translate-x-full', sidebarCollapsed ? 'lg:w-0 lg:overflow-hidden' : 'lg:translate-x-0 w-64']"
-                 class="fixed top-0 left-0 h-full z-[50000] transition-all duration-300 ease-in-out w-64">
+            <div :class="[sidebarOpen ? 'translate-x-0' : '-translate-x-full', sidebarCollapsed ? 'lg:w-0 lg:overflow-hidden' : 'lg:translate-x-0 w-56']"
+                 class="fixed top-0 left-0 h-full z-[50000] transition-all duration-300 ease-in-out w-56">
                 @include('layouts.partials.sidebar')
             </div>
 
             <!-- Main Content -->
-            <div :class="sidebarCollapsed ? 'lg:ml-0' : 'lg:ml-64'"
+            <div :class="sidebarCollapsed ? 'lg:ml-0' : 'lg:ml-56'"
                  class="flex-1 flex flex-col min-w-0 transition-all duration-300 ease-in-out" style="position: relative; z-index: 1;">
 
                 @include('layouts.partials.header')

@@ -45,7 +45,7 @@ class ItemController extends Controller
             $query->where('department_id', $request->department);
         }
         
-        $items = $query->paginate(15)->appends($request->query());
+        $items = $query->paginate(10)->appends($request->query());
         return view('items.index', compact('items'));
     }
 
