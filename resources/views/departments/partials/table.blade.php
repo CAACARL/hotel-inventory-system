@@ -262,63 +262,60 @@
              x-transition:leave="transition ease-in duration-200 transform"
              x-transition:leave-start="opacity-100 scale-100 translate-y-0"
              x-transition:leave-end="opacity-0 scale-95 translate-y-4"
-             class="modal-container bg-white rounded-2xl shadow-2xl max-w-md w-full mx-auto relative z-10 border border-blue-200">
+             class="modal-container bg-white rounded-lg shadow-2xl max-w-sm w-full mx-auto relative z-10 border border-blue-200">
             
             <!-- Modern Modal Header with Gradient -->
-            <div class="modal-header-gradient flex items-center justify-between p-4 border-b border-gray-200 rounded-t-2xl" style="background: linear-gradient(135deg, #1E40AF 0%, #3B82F6 100%);">
+            <div class="modal-header-gradient flex items-center justify-between p-2.5 border-b border-gray-200 rounded-t-lg" style="background: linear-gradient(135deg, #1E40AF 0%, #3B82F6 100%);">
                 <div class="flex items-center">
-                    <div class="w-9 h-9 bg-white bg-opacity-20 rounded-xl flex items-center justify-center mr-3 backdrop-blur-sm">
-                        <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="w-6 h-6 bg-white bg-opacity-20 rounded-lg flex items-center justify-center mr-2 backdrop-blur-sm">
+                        <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
                         </svg>
                     </div>
-                    <div>
-                        <h3 class="text-base font-bold text-white">Department Details</h3>
-                        <p class="text-blue-100 text-xs">View department information</p>
-                    </div>
+                    <h3 class="text-sm font-bold text-white">Department Details</h3>
                 </div>
-                <button @click="viewModal = false" class="text-white hover:text-blue-200 transition-colors duration-200 p-1.5 hover:bg-white hover:bg-opacity-10 rounded-lg">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <button @click="viewModal = false" class="text-white hover:text-blue-200 transition-colors duration-200 p-1 hover:bg-white hover:bg-opacity-10 rounded-lg">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                     </svg>
                 </button>
             </div>
             
             <!-- Modal Body -->
-            <div class="p-4">
-                <div class="space-y-3" x-show="selectedDepartment">
+            <div class="p-2.5">
+                <div class="space-y-1.5" x-show="selectedDepartment">
                     <div>
-                        <label class="block text-xs font-semibold text-gray-700 mb-1.5">Department Name</label>
-                        <div class="w-full px-3 py-2 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-xl text-gray-900 font-medium text-sm" x-text="selectedDepartment?.name"></div>
+                        <label class="block text-xs font-semibold text-gray-700 mb-0.5">Department Name</label>
+                        <div class="w-full px-2 py-1 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-lg text-gray-900 font-medium text-xs" x-text="selectedDepartment?.name"></div>
                     </div>
 
                     <div>
-                        <label class="block text-xs font-semibold text-gray-700 mb-1.5">Description</label>
-                        <div class="w-full px-3 py-2 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-xl text-gray-900 font-medium text-sm" x-text="selectedDepartment?.description || 'No description provided'"></div>
+                        <label class="block text-xs font-semibold text-gray-700 mb-0.5">Description</label>
+                        <div class="w-full px-2 py-1 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-lg text-gray-900 font-medium text-xs" x-text="selectedDepartment?.description || 'No description provided'"></div>
                     </div>
                     
                     <div>
-                        <label class="block text-xs font-semibold text-gray-700 mb-1.5">Location</label>
-                        <div class="w-full px-3 py-2 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-xl text-gray-900 font-medium text-sm" x-text="selectedDepartment?.location || 'Not specified'"></div>
+                        <label class="block text-xs font-semibold text-gray-700 mb-0.5">Location</label>
+                        <div class="w-full px-2 py-1 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-lg text-gray-900 font-medium text-xs" x-text="selectedDepartment?.location || 'Not specified'"></div>
                     </div>
                     
                     <div>
-                        <label class="block text-xs font-semibold text-gray-700 mb-1.5">Items Count</label>
-                        <div class="w-full px-3 py-2 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-xl text-gray-900 font-medium text-sm" x-text="(selectedDepartment?.items_count || 0) + ' items'"></div>
+                        <label class="block text-xs font-semibold text-gray-700 mb-0.5">Items Count</label>
+                        <div class="w-full px-2 py-1 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-lg text-gray-900 font-medium text-xs" x-text="(selectedDepartment?.items_count || 0) + ' items'"></div>
                     </div>
                     
                     <div>
-                        <label class="block text-xs font-semibold text-gray-700 mb-1.5">Status</label>
-                        <div class="w-full px-3 py-2 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-xl text-gray-900 font-medium text-sm" x-text="selectedDepartment?.is_active ? 'Active' : 'Inactive'"></div>
+                        <label class="block text-xs font-semibold text-gray-700 mb-0.5">Status</label>
+                        <div class="w-full px-2 py-1 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-lg text-gray-900 font-medium text-xs" x-text="selectedDepartment?.is_active ? 'Active' : 'Inactive'"></div>
                     </div>
                 </div>
                 
                 <!-- Modern Modal Footer -->
-                <div class="flex justify-end mt-4 pt-4 border-t border-gray-200">
+                <div class="flex justify-end mt-2 pt-2 border-t border-gray-200">
                     <button type="button" 
                             @click="viewModal = false"
-                            class="px-4 py-2 text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-xl transition-all duration-200 font-medium text-sm">
+                            class="px-3 py-1 text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-all duration-200 font-medium text-xs">
                         Close
                     </button>
                 </div>

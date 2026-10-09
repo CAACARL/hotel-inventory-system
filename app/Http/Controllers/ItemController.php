@@ -224,8 +224,13 @@ class ItemController extends Controller
     public function processBorrow(Request $request, Item $item)
     {
         if ($item->trashed()) abort(403, 'This item is archived.');
+        
+        // Calculate available quantity (not borrowed)
+        $borrowedQuantity = BorrowedItem::where('item_id', $item->id)->sum('quantity');
+        $availableQuantity = $item->quantity;
+        
         $request->validate([
-            'quantity' => 'required|integer|min:1|max:' . $item->quantity,
+            'quantity' => 'required|integer|min:1|max:' . $availableQuantity,
             'notes' => 'nullable|string',
             'borrower_name' => 'required|string',
             'borrower_department' => 'required|string',
@@ -287,7 +292,7 @@ class ItemController extends Controller
             // Update item quantity
             $item->decrement('quantity', $request->quantity);
 
-            // If all stock is now borrowed, mark as in_use
+            // Update status based on available quantity
             $item->refresh();
             if ($item->quantity <= 0 && $item->status === 'available') {
                 $item->update(['status' => 'in_use']);

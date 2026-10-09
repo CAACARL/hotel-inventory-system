@@ -126,9 +126,9 @@ class BatchController extends Controller
             $item = Item::find($request->item_id);
             $item->increment('quantity', $request->quantity);
 
-            // If item was disposed or spoiled, mark as available now that stock is back
+            // If item was disposed, spoiled, or in_use, mark as available now that stock is back
             $item->refresh();
-            if (in_array($item->status, ['disposed', 'spoiled']) && $item->quantity > 0) {
+            if (in_array($item->status, ['disposed', 'spoiled', 'in_use']) && $item->quantity > 0) {
                 $item->update(['status' => 'available']);
             }
 

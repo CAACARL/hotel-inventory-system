@@ -23,123 +23,120 @@
              x-transition:leave="transition ease-in duration-200 transform"
              x-transition:leave-start="opacity-100 scale-100 translate-y-0"
              x-transition:leave-end="opacity-0 scale-95 translate-y-4"
-             class="modal-container bg-white rounded-2xl shadow-2xl max-w-md w-full mx-auto relative z-10 border border-amber-200">
+             class="modal-container bg-white rounded-lg shadow-2xl max-w-md w-full mx-auto relative z-10 border border-amber-200">
             
             <!-- Modern Modal Header with Gradient -->
-            <div class="modal-header-gradient flex items-center justify-between p-4 border-b border-gray-200 rounded-t-2xl" style="background: linear-gradient(135deg, #3D2914 0%, #D4AF37 100%);">
+            <div class="modal-header-gradient flex items-center justify-between p-2.5 border-b border-gray-200 rounded-t-lg" style="background: linear-gradient(135deg, #3D2914 0%, #D4AF37 100%);">
                 <div class="flex items-center">
-                    <div class="w-9 h-9 bg-white bg-opacity-20 rounded-xl flex items-center justify-center mr-3 backdrop-blur-sm">
-                        <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="w-6 h-6 bg-white bg-opacity-20 rounded-lg flex items-center justify-center mr-2 backdrop-blur-sm">
+                        <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                         </svg>
                     </div>
-                    <div>
-                        <h3 class="text-base font-bold text-white">Create New User</h3>
-                        <p class="text-amber-100 text-xs">Add a new user to the system</p>
-                    </div>
+                    <h3 class="text-sm font-bold text-white">Create New User</h3>
                 </div>
-                <button @click="createModal = false" class="text-white hover:text-amber-200 transition-colors duration-200 p-1.5 hover:bg-white hover:bg-opacity-10 rounded-lg">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <button @click="createModal = false" class="text-white hover:text-amber-200 transition-colors duration-200 p-1 hover:bg-white hover:bg-opacity-10 rounded-lg">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                     </svg>
                 </button>
             </div>
             
             <!-- Modal Body -->
-            <form action="{{ route('users.store') }}" method="POST" class="p-4" @submit="if (!validateForm()) { $event.preventDefault(); }">
+            <form action="{{ route('users.store') }}" method="POST" class="p-2.5" @submit="if (!validateForm()) { $event.preventDefault(); }">
                 @csrf
                 <input type="hidden" name="page" value="{{ request('page', 1) }}">
-                <div class="space-y-3">
+                <div class="space-y-1.5">
                     <div>
-                        <label for="modal_name" class="block text-xs font-semibold text-gray-700 mb-1.5">Full Name</label>
+                        <label for="modal_name" class="block text-xs font-semibold text-gray-700 mb-0.5">Full Name</label>
                         <input type="text" 
                                id="modal_name" 
                                name="name" 
                                x-model="formData.name"
                                value="{{ old('name') }}"
                                required
-                               class="modern-input w-full px-3 py-2 border border-gray-300 rounded-xl transition-all duration-200 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 hover:border-gray-400 text-sm @error('name') border-red-500 @enderror" 
+                               class="modern-input w-full px-2 py-1 border border-gray-300 rounded-lg transition-all duration-200 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 hover:border-gray-400 text-xs @error('name') border-red-500 @enderror" 
                                :class="formErrors.name ? 'border-red-500' : 'border-gray-300'"
                                placeholder="e.g., John Doe">
                         @error('name')
-                            <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
+                            <p class="mt-0.5 text-[10px] text-red-600">{{ $message }}</p>
                         @enderror
-                        <p x-show="formErrors.name" x-text="formErrors.name" class="mt-1 text-xs text-red-600"></p>
+                        <p x-show="formErrors.name" x-text="formErrors.name" class="mt-0.5 text-[10px] text-red-600"></p>
                     </div>
                     
                     <div>
-                        <label for="modal_email" class="block text-xs font-semibold text-gray-700 mb-1.5">Email Address</label>
+                        <label for="modal_email" class="block text-xs font-semibold text-gray-700 mb-0.5">Email Address</label>
                         <input type="email" 
                                id="modal_email" 
                                name="email" 
                                x-model="formData.email"
                                value="{{ old('email') }}"
                                required
-                               class="modern-input w-full px-3 py-2 border border-gray-300 rounded-xl transition-all duration-200 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 hover:border-gray-400 text-sm @error('email') border-red-500 @enderror" 
+                               class="modern-input w-full px-2 py-1 border border-gray-300 rounded-lg transition-all duration-200 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 hover:border-gray-400 text-xs @error('email') border-red-500 @enderror" 
                                :class="formErrors.email ? 'border-red-500' : 'border-gray-300'"
                                placeholder="e.g., john@example.com">
                         @error('email')
-                            <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
+                            <p class="mt-0.5 text-[10px] text-red-600">{{ $message }}</p>
                         @enderror
-                        <p x-show="formErrors.email" x-text="formErrors.email" class="mt-1 text-xs text-red-600"></p>
+                        <p x-show="formErrors.email" x-text="formErrors.email" class="mt-0.5 text-[10px] text-red-600"></p>
                     </div>
                     
                     <div>
-                        <label for="modal_password" class="block text-xs font-semibold text-gray-700 mb-1.5">Password</label>
+                        <label for="modal_password" class="block text-xs font-semibold text-gray-700 mb-0.5">Password</label>
                         <input type="password" 
                                id="modal_password" 
                                name="password" 
                                x-model="formData.password"
                                required
                                minlength="8"
-                               class="modern-input w-full px-3 py-2 border border-gray-300 rounded-xl transition-all duration-200 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 hover:border-gray-400 text-sm @error('password') border-red-500 @enderror" 
+                               class="modern-input w-full px-2 py-1 border border-gray-300 rounded-lg transition-all duration-200 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 hover:border-gray-400 text-xs @error('password') border-red-500 @enderror" 
                                :class="formErrors.password ? 'border-red-500' : 'border-gray-300'"
-                               placeholder="Minimum 8 characters">
+                               placeholder="Min 8 characters">
                         @error('password')
-                            <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
+                            <p class="mt-0.5 text-[10px] text-red-600">{{ $message }}</p>
                         @enderror
-                        <p x-show="formErrors.password" x-text="formErrors.password" class="mt-1 text-xs text-red-600"></p>
+                        <p x-show="formErrors.password" x-text="formErrors.password" class="mt-0.5 text-[10px] text-red-600"></p>
                     </div>
                     
                     <div>
-                        <label for="modal_password_confirmation" class="block text-xs font-semibold text-gray-700 mb-1.5">Confirm Password</label>
+                        <label for="modal_password_confirmation" class="block text-xs font-semibold text-gray-700 mb-0.5">Confirm Password</label>
                         <input type="password" 
                                id="modal_password_confirmation" 
                                name="password_confirmation" 
                                x-model="formData.password_confirmation"
                                required
                                minlength="8"
-                               class="modern-input w-full px-3 py-2 border border-gray-300 rounded-xl transition-all duration-200 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 hover:border-gray-400 text-sm" 
+                               class="modern-input w-full px-2 py-1 border border-gray-300 rounded-lg transition-all duration-200 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 hover:border-gray-400 text-xs" 
                                :class="formErrors.password_confirmation ? 'border-red-500' : 'border-gray-300'"
-                               placeholder="Confirm your password">
-                        <p x-show="formErrors.password_confirmation" x-text="formErrors.password_confirmation" class="mt-1 text-xs text-red-600"></p>
+                               placeholder="Confirm password">
+                        <p x-show="formErrors.password_confirmation" x-text="formErrors.password_confirmation" class="mt-0.5 text-[10px] text-red-600"></p>
                     </div>
                     
                     <div>
-                        <label for="modal_role" class="block text-xs font-semibold text-gray-700 mb-1.5">Role</label>
+                        <label for="modal_role" class="block text-xs font-semibold text-gray-700 mb-0.5">Role</label>
                         <select name="role" 
                                 id="modal_role" 
                                 x-model="formData.role"
                                 required
-                                class="modern-input w-full px-3 py-2 border border-gray-300 rounded-xl transition-all duration-200 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 hover:border-gray-400 text-sm @error('role') border-red-500 @enderror" 
+                                class="modern-input w-full px-2 py-1 border border-gray-300 rounded-lg transition-all duration-200 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 hover:border-gray-400 text-xs @error('role') border-red-500 @enderror" 
                                 :class="formErrors.role ? 'border-red-500' : 'border-gray-300'">
                             <option value="">Select Role</option>
                             <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Admin</option>
                             <option value="staff" {{ old('role') == 'staff' ? 'selected' : '' }}>Staff</option>
                         </select>
                         @error('role')
-                            <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
+                            <p class="mt-0.5 text-[10px] text-red-600">{{ $message }}</p>
                         @enderror
-                        <p x-show="formErrors.role" x-text="formErrors.role" class="mt-1 text-xs text-red-600"></p>
+                        <p x-show="formErrors.role" x-text="formErrors.role" class="mt-0.5 text-[10px] text-red-600"></p>
                     </div>
                     
                     <div>
-                        <label for="modal_department" class="block text-xs font-semibold text-gray-700 mb-1.5">Department</label>
+                        <label for="modal_department" class="block text-xs font-semibold text-gray-700 mb-0.5">Department</label>
                         <select name="department" 
                                 id="modal_department" 
                                 x-model="formData.department"
                                 required
-                                class="modern-input w-full px-3 py-2 border border-gray-300 rounded-xl transition-all duration-200 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 hover:border-gray-400 text-sm @error('department') border-red-500 @enderror" 
+                                class="modern-input w-full px-2 py-1 border border-gray-300 rounded-lg transition-all duration-200 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 hover:border-gray-400 text-xs @error('department') border-red-500 @enderror" 
                                 :class="formErrors.department ? 'border-red-500' : 'border-gray-300'">
                             <option value="">Select Department</option>
                             @foreach($departments as $department)
@@ -149,25 +146,22 @@
                             @endforeach
                         </select>
                         @error('department')
-                            <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
+                            <p class="mt-0.5 text-[10px] text-red-600">{{ $message }}</p>
                         @enderror
-                        <p x-show="formErrors.department" x-text="formErrors.department" class="mt-1 text-xs text-red-600"></p>
+                        <p x-show="formErrors.department" x-text="formErrors.department" class="mt-0.5 text-[10px] text-red-600"></p>
                     </div>
                 </div>
                 
                 <!-- Modern Modal Footer -->
-                <div class="flex justify-end space-x-3 mt-4 pt-3 border-t border-gray-200">
+                <div class="flex justify-end space-x-2 mt-2 pt-2 border-t border-gray-200">
                     <button type="button" 
                             @click="createModal = false; resetForm()"
-                            class="px-3 py-1.5 text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-xl transition-colors duration-200 font-medium text-sm">
+                            class="px-3 py-1 text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors duration-200 font-medium text-xs">
                         Cancel
                     </button>
                     <button type="submit" 
-                            class="animated-button px-4 py-1.5 text-white font-semibold rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 text-sm" 
+                            class="animated-button px-4 py-1 text-white font-semibold rounded-lg transition-all duration-200 shadow-lg text-xs" 
                             style="background: linear-gradient(135deg, #3D2914 0%, #D4AF37 100%);">
-                        <svg class="w-3 h-3 mr-1.5 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                        </svg>
                         Create
                     </button>
                 </div>
@@ -302,65 +296,62 @@
              x-transition:leave="transition ease-in duration-200 transform"
              x-transition:leave-start="opacity-100 scale-100 translate-y-0"
              x-transition:leave-end="opacity-0 scale-95 translate-y-4"
-             class="modal-container bg-white rounded-2xl shadow-2xl max-w-md w-full mx-auto relative z-10 border border-blue-200">
+             class="modal-container bg-white rounded-lg shadow-2xl max-w-sm w-full mx-auto relative z-10 border border-blue-200">
             
             <!-- Modern Modal Header with Gradient -->
-            <div class="modal-header-gradient flex items-center justify-between p-4 border-b border-gray-200 rounded-t-2xl" style="background: linear-gradient(135deg, #1E40AF 0%, #3B82F6 100%);">
+            <div class="modal-header-gradient flex items-center justify-between p-2.5 border-b border-gray-200 rounded-t-lg" style="background: linear-gradient(135deg, #1E40AF 0%, #3B82F6 100%);">
                 <div class="flex items-center">
-                    <div class="w-9 h-9 bg-white bg-opacity-20 rounded-xl flex items-center justify-center mr-3 backdrop-blur-sm">
-                        <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="w-6 h-6 bg-white bg-opacity-20 rounded-lg flex items-center justify-center mr-2 backdrop-blur-sm">
+                        <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
                         </svg>
                     </div>
-                    <div>
-                        <h3 class="text-base font-bold text-white">User Details</h3>
-                        <p class="text-blue-100 text-xs">View user information</p>
-                    </div>
+                    <h3 class="text-sm font-bold text-white">User Details</h3>
                 </div>
-                <button @click="viewModal = false" class="text-white hover:text-blue-200 transition-colors duration-200 p-1.5 hover:bg-white hover:bg-opacity-10 rounded-lg">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <button @click="viewModal = false" class="text-white hover:text-blue-200 transition-colors duration-200 p-1 hover:bg-white hover:bg-opacity-10 rounded-lg">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                     </svg>
                 </button>
             </div>
             
             <!-- Modal Body -->
-            <div class="p-4">
+            <div class="p-2.5">
                 <template x-if="selectedUser">
-                    <div class="space-y-3">
+                    <div class="space-y-1.5">
                         <div>
-                            <label class="block text-xs font-semibold text-gray-700 mb-1.5">User Name</label>
-                            <div class="w-full px-3 py-2 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-xl text-gray-900 font-medium text-sm" x-text="selectedUser?.name"></div>
+                            <label class="block text-xs font-semibold text-gray-700 mb-0.5">User Name</label>
+                            <div class="w-full px-2 py-1 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-lg text-gray-900 font-medium text-xs" x-text="selectedUser?.name"></div>
                         </div>
 
                         <div>
-                            <label class="block text-xs font-semibold text-gray-700 mb-1.5">Email Address</label>
-                            <div class="w-full px-3 py-2 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-xl text-gray-900 font-medium text-sm" x-text="selectedUser?.email"></div>
+                            <label class="block text-xs font-semibold text-gray-700 mb-0.5">Email Address</label>
+                            <div class="w-full px-2 py-1 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-lg text-gray-900 font-medium text-xs" x-text="selectedUser?.email"></div>
                         </div>
                         
                         <div>
-                            <label class="block text-xs font-semibold text-gray-700 mb-1.5">Department</label>
-                            <div class="w-full px-3 py-2 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-xl text-gray-900 font-medium text-sm" x-text="selectedUser?.department"></div>
+                            <label class="block text-xs font-semibold text-gray-700 mb-0.5">Department</label>
+                            <div class="w-full px-2 py-1 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-lg text-gray-900 font-medium text-xs" x-text="selectedUser?.department"></div>
                         </div>
                         
                         <div>
-                            <label class="block text-xs font-semibold text-gray-700 mb-1.5">Role</label>
-                            <div class="w-full px-3 py-2 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-xl text-gray-900 font-medium text-sm capitalize" x-text="selectedUser?.role"></div>
+                            <label class="block text-xs font-semibold text-gray-700 mb-0.5">Role</label>
+                            <div class="w-full px-2 py-1 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-lg text-gray-900 font-medium text-xs capitalize" x-text="selectedUser?.role"></div>
                         </div>
                         
                         <div>
-                            <label class="block text-xs font-semibold text-gray-700 mb-1.5">Status</label>
-                            <div class="w-full px-3 py-2 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-xl text-gray-900 font-medium text-sm" x-text="selectedUser?.is_active ? 'Active' : 'Inactive'"></div>
+                            <label class="block text-xs font-semibold text-gray-700 mb-0.5">Status</label>
+                            <div class="w-full px-2 py-1 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-lg text-gray-900 font-medium text-xs" x-text="selectedUser?.is_active ? 'Active' : 'Inactive'"></div>
                         </div>
                     </div>
                 </template>
                 
                 <!-- Modern Modal Footer -->
-                <div class="flex justify-end mt-4 pt-4 border-t border-gray-200">
+                <div class="flex justify-end mt-2 pt-2 border-t border-gray-200">
                     <button type="button" 
                             @click="viewModal = false"
-                            class="px-4 py-2 text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-xl transition-all duration-200 font-medium text-sm">
+                            class="px-3 py-1 text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-all duration-200 font-medium text-xs">
                         Close
                     </button>
                 </div>
