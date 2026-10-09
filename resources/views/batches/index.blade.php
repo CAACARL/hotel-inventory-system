@@ -232,7 +232,6 @@
                             @endif
                         </div>
                         @endforelse
-                    </div>
             </div>
 
             <!-- Desktop Table View -->
