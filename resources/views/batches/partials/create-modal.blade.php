@@ -83,12 +83,13 @@
                             </div>
 
                             <div>
-                                <label for="create_unit_cost" class="block text-xs font-semibold text-gray-700 mb-0.5">Unit Cost (Optional)</label>
+                                <label for="create_unit_cost" class="block text-xs font-semibold text-gray-700 mb-0.5">Unit Cost</label>
                                 <input type="number" 
                                        id="create_unit_cost"
                                        name="unit_cost" 
                                        min="0" 
                                        step="0.01"
+                                       required
                                        class="modern-input w-full px-2 py-1 border border-gray-300 rounded-lg transition-all duration-200 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 hover:border-gray-400 text-xs"
                                        placeholder="0.00">
                             </div>
