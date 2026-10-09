@@ -119,7 +119,7 @@
                              x-transition:leave-end="opacity-0 scale-95 translate-x-2"
                              @click.away="itemsDropdown = false"
                              class="hidden lg:block fixed left-56 w-56 bg-white/95 backdrop-blur-sm rounded-xl shadow-2xl border border-gray-200 py-2 z-[99999]"
-                             style="top: 272px; display: none;">
+                             style="top: 225px; display: none;">
                             <div class="px-3 py-1">
                                 <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Item Management</p>
                             </div>
