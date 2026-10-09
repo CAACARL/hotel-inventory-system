@@ -107,7 +107,6 @@
             </div>
             @endforelse
         </div>
-</div>
 
 <!-- Desktop Table View -->
 <div class="hidden sm:block bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
@@ -283,7 +282,6 @@
             </table>
         </div>
     </div>
-</div>
 
 <!-- Pagination -->
 <div class="mt-4 sm:mt-6">

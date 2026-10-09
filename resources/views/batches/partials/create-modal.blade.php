@@ -246,8 +246,6 @@
                             Add Stock
                         </button>
                     </div>
-                        </button>
-                    </div>
                 </form>
             </div>
         </div>

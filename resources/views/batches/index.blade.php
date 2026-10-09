@@ -334,7 +334,6 @@
                         </table>
                     </div>
                 </div>
-            </div>
 
             <!-- Pagination -->
             <div class="mt-4 sm:mt-6">
